@@ -6,6 +6,7 @@ from apps.accounts.api.serializers.user import (
     UserUpdatePasswordSerializer,
     UserUpdateProfileImageSerializer,
 )
+from apps.accounts.api.serializers.token_obtain import TokenObtainPairSerializer
 
 __all__ = [
     "UserCreateSerializer",
@@ -14,4 +15,5 @@ __all__ = [
     "UserDetailSerializer",
     "UserReadSerializer",
     "UserUpdateSerializer",
+    "TokenObtainPairSerializer",
 ]
