@@ -49,4 +49,3 @@ deploy_restart:
 
 deploy_migrate:
 	ssh root@68.183.124.156 'cd /home/todo_backend/ && git pull origin main && make migrate'
-
