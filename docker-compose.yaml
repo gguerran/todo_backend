@@ -1,0 +1,50 @@
+services:
+  todo_db:
+    container_name: todo_db
+    image: postgres:13.0-alpine
+    volumes:
+      - todo_data:/var/lib/postgresql/data/
+      - ./pg_scripts/load-extensions.sql:/docker-entrypoint-initdb.d/load-extensions.sql
+    env_file:
+      - .db.env
+    ports:
+      - "${DB_CONTAINER_PORT}:${DB_PORT}"
+    restart: always
+    networks:
+      todonetwork:
+        ipv4_address: 172.25.0.2
+    hostname: todo_db
+
+  todo_django:
+    container_name: todo_django
+    build:
+      context: .
+      args:
+        - REQUIREMENTS_PATH=${REQUIREMENTS_PATH}
+    command: ${BACKEND_COMMAND}
+    volumes:
+      - .:/home/app/
+      - ${MEDIA_ROOT}:/home/app/media
+      - ${STATIC_ROOT}:/home/app/static
+    ports:
+      - "${BACKEND_CONTAINER_PORT}:${BACKEND_PORT}"
+    env_file:
+      - .env
+    depends_on:
+      - todo_db
+    restart: always
+    networks:
+      todonetwork:
+        ipv4_address: 172.25.0.3
+    hostname: todo_django
+
+volumes:
+  todo_data:
+
+networks:
+  todonetwork:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.25.0.0/16
+         gateway: 172.25.0.1

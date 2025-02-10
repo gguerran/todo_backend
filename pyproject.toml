@@ -1,0 +1,15 @@
+[tool.black]
+line-length = 119
+target-version = ['py36']
+exclude = '''
+^/(
+  (
+      \.git
+    | docker
+    | .+/migrations
+    | venv
+    | email-log-messages
+  )/
+  | manage.py
+)
+'''
