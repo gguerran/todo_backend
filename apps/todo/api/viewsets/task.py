@@ -22,3 +22,6 @@ class TaskViewSet(BaseModelViewSet):
         "partial_update": TaskUpdateSerializer,
     }
     search_fields = Task.get_search_fields()
+
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)

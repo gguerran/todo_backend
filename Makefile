@@ -42,11 +42,11 @@ build:
 	docker compose up --build
 
 deploy:
-	ssh root@68.183.124.156 'cd /home/todo-plataform-backend/ && git pull origin main'
+	ssh root@68.183.124.156 'cd /home/todo_backend/ && git pull origin main'
 
 deploy_restart:
-	ssh root@68.183.124.156 'cd /home/todo-plataform-backend/ && docker compose down && git pull origin main && docker compose up --build -d'
+	ssh root@68.183.124.156 'cd /home/todo_backend/ && docker compose down && git pull origin main && docker compose up --build -d'
 
 deploy_migrate:
-	ssh root@68.183.124.156 'cd /home/todo-plataform-backend/ && git pull origin main && make migrate'
+	ssh root@68.183.124.156 'cd /home/todo_backend/ && git pull origin main && make migrate'
 
