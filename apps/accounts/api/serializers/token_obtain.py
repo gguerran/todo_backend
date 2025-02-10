@@ -1,5 +1,4 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer as JWTTokenObtainPairSerializer
-from apps.accounts.models import Student
 
 
 class TokenObtainPairSerializer(JWTTokenObtainPairSerializer):
